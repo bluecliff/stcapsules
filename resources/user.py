@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from flask.ext.restful import Resource,fields,reqparse,marshal
+from flask.ext.restful import Resource,fields,reqparse,marshal_with
 from flask import session
 from models.user import get_user,add_user
 
@@ -16,11 +16,14 @@ user_fields={
 
 class UserResource(Resource):
     '''查询是否存在这个user，如不存在，即增加这个user'''
+    @marshal_with(user_fields)
     def post(self):
         args=parser.parse_args()
-        user=get_user(args['user_id'])
-        if user:
-            session['user']=user.id
-            return marshal(user,user_fields)
-        user=add_user(args['user_id'])
-        return marshal(user,user_fields)
+        try:
+            user=get_user(args['user_id'])[0]
+            session['user']=str(user.id)
+            return user
+        except:
+            user=add_user(args['user_id'])
+            session['user']=str(user.id)
+            return user

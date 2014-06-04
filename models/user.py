@@ -4,7 +4,7 @@
 from storages.user import User
 
 def get_user(user_id):
-    return User.objects(user_id=user_id)
+    return [obj for obj in User.objects(user_id=user_id)]
 
 def add_user(user_id):
     user=User()
