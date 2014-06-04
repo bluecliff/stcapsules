@@ -4,10 +4,12 @@
 from flask import Flask
 from flask.ext.restful import Api
 from resources.user import UserResource
+from resources.post import PostResource
 
 app = Flask(__name__)
 api = Api(app)
 api.add_resource(UserResource,'/api/login/')
+api.add_resource(PostResource,'/api/post/')
 
 app.secret_key='lijsf'
 

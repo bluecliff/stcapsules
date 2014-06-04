@@ -4,28 +4,30 @@
 from core import db
 import datetime
 from user import User
-from mongoengine import StringField,ReferenceField,DateTimeField,ListField,EmbeddedDocumentField,PointField,IntField
+from mongoengine import Document,StringField,URLField,ReferenceField,DateTimeField,ListField,EmbeddedDocumentField,PointField,IntField
 
 PERMISSIONS={'PUBLIC':0,
              'PROTECTED':1,
              'PRIVATE':2,
+             'ADS':3,
         }
 
-class Post(db.Document):
+class Post(Document):
     @property
     def id(self):
         return str(self.pk)
 
     author=ReferenceField(User)
+    title=StringField(required=True,max_length=20)
     location=PointField(required=True)
     distance=IntField(required=True)
     created_at=DateTimeField(default=datetime.datetime.utcnow,required=True)
     active_time=DateTimeField(required=True)
-    permission=IntField(required=True,default=PERMISSIONS['PUBLIC'])
+    category=IntField(required=True,default=PERMISSIONS['PUBLIC'])
     followers=IntField(required=True,default=0)
     content=StringField(required=True)
-    image=StringField(max_length=1024)
-    wavefield=StringField(max_length=1024)
+    imageurl=URLField()
+    waveurl=URLField()
     comments=ListField(EmbeddedDocumentField('Comment'))
 
     meta={

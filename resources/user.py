@@ -4,6 +4,7 @@
 from flask.ext.restful import Resource,fields,reqparse,marshal_with
 from flask import session
 from models.user import get_user,add_user
+from base import LengthField
 
 parser=reqparse.RequestParser()
 parser.add_argument('user_id',type=str)
@@ -11,7 +12,7 @@ parser.add_argument('user_id',type=str)
 user_fields={
         'id':fields.String,
         'user_id':fields.String,
-        'favourites':fields.String,
+        'favourites':LengthField,
         }
 
 class UserResource(Resource):
@@ -20,7 +21,7 @@ class UserResource(Resource):
     def post(self):
         args=parser.parse_args()
         try:
-            user=get_user(args['user_id'])[0]
+            user=get_user(user_id=args['user_id'])[0]
             session['user']=str(user.id)
             return user
         except:

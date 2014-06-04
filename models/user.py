@@ -3,8 +3,8 @@
 
 from storages.user import User
 
-def get_user(user_id):
-    return [obj for obj in User.objects(user_id=user_id)]
+def get_user(**kwargs):
+    return [obj for obj in User.objects(**kwargs)]
 
 def add_user(user_id):
     user=User()
@@ -14,3 +14,11 @@ def add_user(user_id):
     except:
         return None
     return user
+
+def get_or_create(user_id):
+    try:
+        user=User.get(user_id=user_id)
+    except:
+        return add_user(user_id)
+    return user
+
