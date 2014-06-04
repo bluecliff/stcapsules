@@ -42,7 +42,7 @@ favourites字段是用户收藏的胶囊数目，id是用户的唯一标识，us
     + imageurl:
     + waveurl:
 
-- /api/post/<postid>/
+- /api/post/\<postid\>/
 
     + GET方法，获取当前用户可见的某一个胶囊的具体信息，postid为get参数，值为要获取的胶囊
       的ID
