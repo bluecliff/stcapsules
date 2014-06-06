@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from models.user import get_user
+from models.user import check_user
 from flask import session,abort
 import functools
 import math
 
 def get_current_user():
     try:
-        return get_user(id=session['user'])[0]
+        return check_user(id=session['user'])[0]
     except:
         return None
 

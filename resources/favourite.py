@@ -1,8 +1,8 @@
 #!/usr/bin/env python,add_favourite_item,del_favourite_item
 # encoding: utf-8
 from flask.ext.restful import Resource,fields,marshal
-from models.post import get_favourite_items,add_favourite_item,del_favourite_item
-from base import BaseArgs,LocationField,UserField
+from models.user_post_relation import get_favourite_items,add_favourite_item,del_favourite_item
+from base import BaseArgs,LocationField,UserField,LengthField
 from utils import authenticated
 
 class FavQueryArgs(BaseArgs):
@@ -20,10 +20,12 @@ class FavDeleteArgs(BaseArgs):
 
 fav_fields={
         'id':fields.String,
-        'title':fields.String,
         'author':UserField,
+        'title':fields.String,
         'location':LocationField,
+        'active_time':fields.DateTime,
         'category':fields.Integer,
+        'followers':LengthField,
         }
 
 class FavouriteResource(Resource):

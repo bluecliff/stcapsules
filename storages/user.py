@@ -3,7 +3,7 @@
 
 from core import db
 import datetime
-from mongoengine import Document,StringField,ListField,ReferenceField,DateTimeField
+from mongoengine import Document,StringField,DateTimeField
 
 
 class User(Document):

@@ -11,19 +11,57 @@
 ```
 {
     "favourites": 0,
-    "id": "538e94d5809cb81362fb4b93",
-    "user_id": "12345673"
+    "id": 317970455,
+    "receives": 0,
 }
 ```
 
-favourites字段是用户收藏的胶囊数目，id是用户的唯一标识，user_id是用户的微博id。
+favourites字段是用户收藏的胶囊数目，receives是用户收到的胶囊数目，user_id是用户的微博id。
+
+** 若id为null则登录出错 **
 
 ## Favourites API
 - /api/favs/
 
-  + GET方法，获取当前用户的收藏列表，返回json格式数据。
-  + POST方法，增加一个收藏。POST提交数据包括一个post_id，值为要收藏的胶囊的ID。
-  + DELETE方法，删除一个收藏。提交数据包括一个post_id,值为要删除的收藏的胶囊ID。
+  + GET方法，获取当前用户的收藏列表，返回json格式数据。可带有start和end参数获取end-start条胶囊
+    如/api/favs/?start=0&end=12获取前12条收藏。返回json列表，是每个收藏的信息。如下所示：
+    ```
+    [
+    {
+        "active_time": "Sat, 23 May 1970 21:21:18 -0000",
+        "author": "3179705582",
+        "category": 3,
+        "followers": 1,
+        "id": "53913dd5809cb80b461b09d5",
+        "location": [
+            120,
+            140
+        ],
+        "title": "Test"
+    },
+    {
+        "active_time": "Sat, 23 May 1970 21:21:18 -0000",
+        "author": "3179705582",
+        "category": 2,
+        "followers": 1,
+        "id": "53912798809cb8082cba3dd4",
+        "location": [
+            120,
+            140
+        ],
+        "title": "Test"
+    }
+    ]
+    ```
+  + POST方法，增加一个收藏。POST提交数据包括一个post_id，值为要收藏的胶囊的ID。返回更新后的收藏列表的前10条。数据格式同上。
+  + DELETE方法，删除一个收藏。提交数据包括一个post_id,值为要删除的收藏的胶囊ID。返回更新后的收藏列表的前10条，数据格式同上。
+
+## Receive API
+
+- /api/receives/
+
+  + GET方法，获取当前用户收到的胶囊列表，返回json格式数据，可带start,end参数，如/api/receives/?start=0&end=10,将获取前10条。
+    数据格式和favourites API返回数据格式相同。
 
 ## Post API
 
