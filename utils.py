@@ -12,7 +12,7 @@ def get_current_user():
     except:
         return None
 
-def authenticated(*req):
+def authenticated():
     def actualDecorator(method):
         @functools.wraps(method)
         def wrapper(self,*args,**kwargs):

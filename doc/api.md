@@ -33,14 +33,18 @@ favourites字段是用户收藏的胶囊数目，id是用户的唯一标识，us
 
   + POST方法，当前用户增加一条胶囊纪录，POST参数包括：
 
-    + longitude:
-    + latitude:
-    + distance:
-    + active_time:
-    + permission:
-    + content:
-    + imageurl:
-    + waveurl:
+    + longitude: 经度，浮点数，由手机传感器获取
+    + latitude: 维度，浮点数，由手机传感器获取
+    + distance: 距离，指定该胶囊的可见范围，整数，用户由单选框输入，上传值为0,1,2,3四个整数之一，分别代表由近及远的距离。
+    + active_time: 胶囊激活时间，unix时间戳
+    + category: 胶囊的类型，值为整数0,1,2,3之一，分别代表公开可见，发给好友，私密胶囊，广告彩蛋四大类型。由用户单选框输入。
+    + title: 胶囊的标题
+    + content: 胶囊内容，用户输入，文本类型
+    + imageurl: 图片链接，可选，形式待定
+    + waveurl: 声音链接，可选，形式待定
+    + receivers: 在类型为1时的必填选项，值为发送目标的微博ID
+
+    返回为该新增胶囊的信息，json格式：
 
 - /api/post/\<postid\>/
 

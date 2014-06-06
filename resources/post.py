@@ -3,10 +3,10 @@
 
 from flask.ext.restful import Resource,marshal,fields
 from utils import authenticated
-from base import BaseArgs,UserField,LocationField
-from models.post import add_post,get_post
+from base import BaseArgs,UserField,LocationField,LengthField
+from models.post import add_post,get_post,get_post_list
 
-class PostPostArgs(BaseArgs):
+class PostListPostArgs(BaseArgs):
     def rules(self):
         self.parser.add_argument('title',type=str,help='title must be string')
         self.parser.add_argument('longitude',type=float,help='longtitude must be float')
@@ -19,29 +19,56 @@ class PostPostArgs(BaseArgs):
         self.parser.add_argument('waveurl',type=str)
         self.parser.add_argument('receivers',type=str,action='append')
 
-class PostQueryArgs(BaseArgs):
+class PostListQueryArgs(BaseArgs):
     def rules(self):
         self.parser.add_argument('start',type=int)
         self.parser.add_argument('end',type=int)
         self.parser.add_argument('longitude',type=float)
         self.parser.add_argument('latitude',type=float)
 
-post_fields={
+class PostQueryArgs(BaseArgs):
+    def rules(self):
+        self.parser.add_argument('post_id',type=str)
+
+post_list_fields={
         'id':fields.String,
-        'title':fields.String,
         'author':UserField,
+        'title':fields.String,
         'location':LocationField,
+        'active_time':fields.DateTime,
+        'category':fields.Integer,
+        'followers':LengthField,
         }
 
-class PostResource(Resource):
+post_fields={
+        'id':fields.String,
+        'author':UserField,
+        'title':fields.String,
+        'location':LocationField,
+        'active_time':fields.DateTime,
+        'category':fields.Integer,
+        'followers':LengthField,
+        'content':fields.String,
+        'imageurl':fields.String,
+        'waveurl':fields.String,
+        }
+
+class PostListResource(Resource):
     @authenticated()
     def post(self):
         """add an new item to Post collection"""
-        args=PostPostArgs().args
-        return marshal(add_post(**args),post_fields)
+        args=PostListPostArgs().args
+        return marshal(add_post(**args),post_list_fields)
 
     @authenticated()
     def get(self):
         """get items which could be seen by current user"""
-        args=PostQueryArgs().args
-        return marshal(get_post(**args),post_fields)
+        args=PostListQueryArgs().args
+        return marshal(get_post_list(**args),post_list_fields)
+
+class PostResource(Resource):
+    @authenticated()
+    def get(self,post_id):
+        """get a post deatails"""
+        #args=PostQueryArgs().args
+        return marshal(get_post(post_id=post_id),post_fields)
