@@ -1,44 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from storages.post import Post
-from utils import get_current_user
+from storages.post import Post,DISTANCE,CATEGORY
 from config import DEFAULT_ITEMS
+from utils import get_current_user
 import datetime
 from models.user_post_relation import add_receives
-
-def get_favourite_items(**kwargs):
-    user =get_current_user()
-    if user is None:
-        return None
-    ret=[]
-    start=kwargs.pop('start',0)
-    end=kwargs.pop('end',DEFAULT_ITEMS)
-    for post_id in user.favourites[start:end]:
-        try:
-            post=Post.get(id=post_id)
-            ret.append(post)
-        except:
-            continue
-    return ret
-
-def add_favourite_item(post_id):
-    user=get_current_user()
-    if user is None:
-        return None
-    fav=user.favourites
-    fav.append(post_id)
-    user.update(set__favourites=fav)
-    return get_favourite_items()
-
-def del_favourite_item(post_id):
-    user=get_current_user()
-    if user is None:
-        return None
-    fav=user.favourites
-    fav.remove(post_id)
-    user.update(set__favourites=fav)
-    return get_favourite_items()
+from mongoengine import Q
 
 def add_post(**kwargs):
     """add an item to Post"""
@@ -53,6 +21,30 @@ def add_post(**kwargs):
         post[key]=kwargs[key]
     post['author']=user
     post.save()
-    add_receives(post.id,receivers)
+    add_receives(post,receivers)
     return post
+
+def get_post(**kwargs):
+    """get post list"""
+    user=get_current_user()
+    if user is  None:
+        return None
+    current_point=[kwargs['longitude'],kwargs['latitude']]
+    start=kwargs.pop('start',0)
+    end=kwargs.pop('end',DEFAULT_ITEMS)
+
+    q1=Q(active_time__lte=datetime.datetime.utcnow())
+
+    q2=[]
+    for index,value in enumerate(DISTANCE):
+        q2.append(Q(distance=index) & Q(location__near=current_point,location__max_distance=value))
+
+    q3=[]
+    q3.append(Q(category=CATEGORY['PUBLIC']))
+    q3.append(Q(category=CATEGORY['ADS']))
+    q3.append(Q(category=CATEGORY['PRIVATE']) & Q(author=user))
+    q3.append(Q(category=CATEGORY['PROTECTED']) & Q(receivers=user))
+
+    return [obj for obj in Post.objects(q1 & (q3[0] | q3[3]))]
+    return [obj for obj in Post.objects(q1 & (q2[0] | q2[1] | q2[2] | q2[3]) &(q3[0]|q3[1]|q3[2]|q3[3]))[start:end]]
 

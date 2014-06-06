@@ -11,14 +11,14 @@ def add_user(user_id):
     user.user_id=user_id
     try:
         user.save()
+        return user
     except:
         return None
-    return user
 
 def get_or_create(user_id):
     try:
-        user=User.get(user_id=user_id)
+        user=User.objects().get(user_id=user_id)
+        return user
     except:
         return add_user(user_id)
-    return user
 

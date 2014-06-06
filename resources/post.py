@@ -3,8 +3,8 @@
 
 from flask.ext.restful import Resource,marshal,fields
 from utils import authenticated
-from base import BaseArgs,UserField
-from models.post import add_post
+from base import BaseArgs,UserField,LocationField
+from models.post import add_post,get_post
 
 class PostPostArgs(BaseArgs):
     def rules(self):
@@ -19,10 +19,18 @@ class PostPostArgs(BaseArgs):
         self.parser.add_argument('waveurl',type=str)
         self.parser.add_argument('receivers',type=str,action='append')
 
+class PostQueryArgs(BaseArgs):
+    def rules(self):
+        self.parser.add_argument('start',type=int)
+        self.parser.add_argument('end',type=int)
+        self.parser.add_argument('longitude',type=float)
+        self.parser.add_argument('latitude',type=float)
+
 post_fields={
         'id':fields.String,
         'title':fields.String,
         'author':UserField,
+        'location':LocationField,
         }
 
 class PostResource(Resource):
@@ -31,3 +39,9 @@ class PostResource(Resource):
         """add an new item to Post collection"""
         args=PostPostArgs().args
         return marshal(add_post(**args),post_fields)
+
+    @authenticated()
+    def get(self):
+        """get items which could be seen by current user"""
+        args=PostQueryArgs().args
+        return marshal(get_post(**args),post_fields)

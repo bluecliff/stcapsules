@@ -12,5 +12,4 @@ class User(Document):
         return str(self.pk)
 
     user_id=StringField(max_length=256,unique=True,required=True)
-    favourites=ListField(StringField(max_length=24))
     created_at=DateTimeField(default=datetime.datetime.utcnow,required=True)

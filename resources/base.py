@@ -9,11 +9,11 @@ class LengthField(fields.Raw):
 
 class LocationField(fields.Raw):
     def format(self,value):
-        return {'longitude':value['coordinates']}
+        return value
 
 class UserField(fields.Raw):
     def format(self,value):
-        return value.id
+        return value.user_id
 
 class BaseArgs(object):
     def __init__(self):

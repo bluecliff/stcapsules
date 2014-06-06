@@ -12,7 +12,6 @@ parser.add_argument('user_id',type=str)
 user_fields={
         'id':fields.String,
         'user_id':fields.String,
-        'favourites':LengthField,
         }
 
 class UserResource(Resource):
