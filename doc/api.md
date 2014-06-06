@@ -1,4 +1,4 @@
-# stcapusule apc document
+# stcapusule api document
 
 ## User API
 - /api/login/
@@ -29,7 +29,7 @@ favourites字段是用户收藏的胶囊数目，id是用户的唯一标识，us
 
 - /api/posts/
 
-  + GET方法，获取当前用户可见的胶囊列表，返回Json个数数据。
+  + GET方法，获取当前用户可见的胶囊列表，返回Json格式数据。
 
       /api/posts/?latitude=140&longitude=120
     ```
@@ -113,3 +113,29 @@ favourites字段是用户收藏的胶囊数目，id是用户的唯一标识，us
         "waveurl": "http://www.url2.com"
     }
     ```
+
+## Comment API
+
+- /api/comments/\<postid\>/
+
+    + GET方法，获取对应胶囊的评论列表，可附带get参数start和end，标识获取的数目，如/api/comments/53913dd5809cb80b461b09d5/?start=10&end=20
+      将获取到该胶囊的第10到20条评论。返回json格式数据。
+      ```
+      [
+        {
+            "author": "3179705582",
+            "content": "Test comment6",
+            "created_at": "Fri, 06 Jun 2014 09:36:19 -0000"
+        },
+        {
+            "author": "3179705582",
+            "content": "Test comment7",
+            "created_at": "Fri, 06 Jun 2014 09:36:19 -0000"
+        },
+      ]
+      ```
+
+    + POST方法，向对应的postid的胶囊增加一条评论，POST方法需要提交的参数有:
+      - content 评论内容，为字符串格式。
+
+      返回json格式，为新的评论列表，默认前10条。格式同上
