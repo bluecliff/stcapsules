@@ -31,6 +31,36 @@ favourites字段是用户收藏的胶囊数目，id是用户的唯一标识，us
 
   + GET方法，获取当前用户可见的胶囊列表，返回Json个数数据。
 
+      /api/posts/?latitude=140&longitude=120
+    ```
+    [
+    {
+        "active_time": "Sat, 23 May 1970 21:21:18 -0000",
+        "author": "3179705582",
+        "category": 2,
+        "followers": 0,
+        "id": "53912798809cb8082cba3dd4",
+        "location": [
+            120,
+            140
+        ],
+        "title": "Test"
+    },
+    {
+        "active_time": "Sat, 23 May 1970 21:21:18 -0000",
+        "author": "3179705582",
+        "category": 3,
+        "followers": 0,
+        "id": "5391279d809cb8082cba3dd5",
+        "location": [
+            120,
+            140
+        ],
+        "title": "Test"
+    }
+    ]
+    ```
+
   + POST方法，当前用户增加一条胶囊纪录，POST参数包括：
 
     + longitude: 经度，浮点数，由手机传感器获取
@@ -45,8 +75,41 @@ favourites字段是用户收藏的胶囊数目，id是用户的唯一标识，us
     + receivers: 在类型为1时的必填选项，值为发送目标的微博ID
 
     返回为该新增胶囊的信息，json格式：
+    ```
+    {
+        "active_time": "Sat, 23 May 1970 21:21:18 -0000",
+        "author": "3179705582",
+        "category": 3,
+        "followers": 0,
+        "id": "539145d4809cb8116d5d832c",
+        "location": [
+        120,
+        140
+        ],
+        "title": "Test"
+    }
+    ```
 
 - /api/post/\<postid\>/
 
     + GET方法，获取当前用户可见的某一个胶囊的具体信息，postid为get参数，值为要获取的胶囊
       的ID
+
+    /api/post/53913dd5809cb80b461b09d5/
+    ```
+    {
+        "active_time": "Sat, 23 May 1970 21:21:18 -0000",
+        "author": "3179705582",
+        "category": 3,
+        "content": "test capusuls test capusulstest capusulstest capusulstest capusulstest capusulstest capusuls",
+        "followers": 0,
+        "id": "53913dd5809cb80b461b09d5",
+        "imageurl": "http://www.url1.com",
+        "location": [
+            120,
+            140
+        ],
+        "title": "Test",
+        "waveurl": "http://www.url2.com"
+    }
+    ```
