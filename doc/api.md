@@ -137,16 +137,16 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
     1. 若用户增加图片或者声音属性，则用户每增加一个文件客户端需要访问一次 GET /api/key/，获得一个标识唯一文件的key。
     2. 用户点击提交按钮后，客户端需要首先访问 GET /api/rs/ 获得一个上传凭证uptoken。
     3. 用户上传文件，POST http://http://up.qiniu.com/ 上传文件时必须带有上面获得的uptoken参数和key参数,：
-    ```
-       <form method="post" action="http://up.qiniu.com/" enctype="multipart/form-data">
-            <input name="key" type="hidden" value="<key>">
-            <input name="x:<custom_name>" type="hidden" value="<custom_value>">
-            <input name="token" type="hidden" value="<uptoken>">
-            <input name="file" type="file" />
-       </form>
-    ```
-    上面的x开头的参数是可选的参数，可有可无。注意：每一个文件都需要单独的一个form表单，所以有多个文件时需要构造多个表单。这些
-    表单的key不同，但uptoken可相同。uptoken目前的有效期是1小时。
+        ```
+           <form method="post" action="http://up.qiniu.com/" enctype="multipart/form-data">
+                <input name="key" type="hidden" value="<key>">
+                <input name="x:<custom_name>" type="hidden" value="<custom_value>">
+                <input name="token" type="hidden" value="<uptoken>">
+                <input name="file" type="file" />
+           </form>
+        ```
+       上面的x开头的参数是可选的参数，可有可无。注意：每一个文件都需要单独的一个form表单，所以有多个文件时需要构造多个表单       。这些
+       表单的key不同，但uptoken可相同。uptoken目前的有效期是1小时。
 
     4. 文件上传成功后，返回200状态码，以及json格式的数据：{"hash":"Fi8WaVIin41pPc0YGf55rk9WGvYg","key":"123458","x:username":""}
     5. 开始向/api/posts/接口提交数据，数据格式如上文所示。其中imagekey和wavekey分别对应上传文件时使用的key，此外文件上传成功后
