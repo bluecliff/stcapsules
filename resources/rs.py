@@ -4,6 +4,7 @@
 ##qiniu resource  token
 
 from flask.ext.restful import Resource,marshal,fields
+from bson.objectid import ObjectId
 from utils import authenticated
 from config import QINIU_AK,QINIU_SK,QINIU_BUCKET_NAME
 import qiniu.rs
@@ -27,3 +28,9 @@ class RsResource(Resource):
         uptoken=Uptoken()
         return {'uptoken':uptoken.uptoken}
         #return marshal({'uptoken':uptoken.uptoken},rs_fields)
+
+class KeyResource(Resource):
+    @authenticated()
+    def get(self):
+        key=str(ObjectId())
+        return {'key':key}

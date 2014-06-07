@@ -8,7 +8,7 @@ from resources.post import PostResource,PostListResource
 from resources.comment import CommentResource
 from resources.favourite import FavouriteResource
 from resources.receive import ReceiveResource
-from resources.rs import RsResource
+from resources.rs import RsResource,KeyResource
 
 app = Flask(__name__)
 app.debug=True
@@ -20,8 +20,9 @@ api.add_resource(CommentResource,'/api/comments/<string:post_id>/')
 api.add_resource(FavouriteResource,'/api/favs/')
 api.add_resource(ReceiveResource,'/api/receives/')
 api.add_resource(RsResource,'/api/rs/')
+api.add_resource(KeyResource,'/api/key/')
 
-app.secret_key='lijsf'
+app.secret_key='lijsf_stcapsule'
 
 from bae.core.wsgi import WSGIApplication
 application = WSGIApplication(app)
