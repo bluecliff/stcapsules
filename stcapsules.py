@@ -22,3 +22,6 @@ api.add_resource(RsResource,'/api/rs/')
 
 app.secret_key='lijsf'
 
+
+from bae.core.wsgi import WSGIApplication
+application = WSGIApplication(app)
