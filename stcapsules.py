@@ -11,6 +11,7 @@ from resources.receive import ReceiveResource
 from resources.rs import RsResource
 
 app = Flask(__name__)
+app.debug=True
 api = Api(app)
 api.add_resource(UserResource,'/api/login/')
 api.add_resource(PostResource,'/api/post/<string:post_id>/')
@@ -21,7 +22,7 @@ api.add_resource(ReceiveResource,'/api/receives/')
 api.add_resource(RsResource,'/api/rs/')
 
 app.secret_key='lijsf'
-
+app.run()
 
 from bae.core.wsgi import WSGIApplication
 application = WSGIApplication(app)
