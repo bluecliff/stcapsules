@@ -29,8 +29,8 @@ class Post(Document):
     followers=ListField(ReferenceField(User))
     receivers=ListField(ReferenceField(User))
     content=StringField(required=True)
-    imageurl=URLField()
-    waveurl=URLField()
+    imagekey=StringField()
+    wavekey=StringField()
 
     meta={
             'ordering':['-active_time']

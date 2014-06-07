@@ -3,7 +3,7 @@
 
 from flask.ext.restful import Resource,marshal,fields
 from utils import authenticated
-from base import BaseArgs,UserField,LocationField,LengthField
+from base import BaseArgs,UserField,LocationField,LengthField,KeyURLField
 from models.post import add_post,get_post,get_post_list
 
 class PostListPostArgs(BaseArgs):
@@ -15,8 +15,8 @@ class PostListPostArgs(BaseArgs):
         self.parser.add_argument('active_time',type=int,help='active_time must be an timedate type')
         self.parser.add_argument('category',type=int,help='category have to be integer')
         self.parser.add_argument('content',type=str)
-        self.parser.add_argument('imageurl',type=str)
-        self.parser.add_argument('waveurl',type=str)
+        self.parser.add_argument('imagekey',type=str)
+        self.parser.add_argument('wavekey',type=str)
         self.parser.add_argument('receivers',type=str,action='append')
 
 class PostListQueryArgs(BaseArgs):
@@ -49,8 +49,8 @@ post_fields={
         'category':fields.Integer,
         'followers':LengthField,
         'content':fields.String,
-        'imageurl':fields.String,
-        'waveurl':fields.String,
+        'imageurl':KeyURLField(attribute='imagekey'),
+        'waveurl':KeyURLField(attribute='wavekey'),
         }
 
 class PostListResource(Resource):

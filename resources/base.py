@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 from flask.ext.restful import fields,reqparse
+from config import QINIU_DOMAIN
 
 class LengthField(fields.Raw):
     def format(self,value):
@@ -14,6 +15,13 @@ class LocationField(fields.Raw):
 class UserField(fields.Raw):
     def format(self,value):
         return value.user_id
+
+class KeyURLField(fields.Raw):
+    def format(self,value):
+        if value:
+            return QINIU_DOMAIN+str(value)
+        else:
+            return None
 
 class BaseArgs(object):
     def __init__(self):

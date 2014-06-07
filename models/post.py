@@ -16,6 +16,8 @@ def add_post(**kwargs):
     post=Post()
     post['location']=[kwargs.pop('longitude'),kwargs.pop('latitude')]
     post['active_time']=datetime.datetime.utcfromtimestamp(kwargs.pop('active_time'))
+    post['imagekey']=kwargs.pop('imagekey')
+    post['wavekey']=kwargs.pop('wavekey')
     receivers=kwargs.pop('receivers')
     for key in kwargs:
         post[key]=kwargs[key]
