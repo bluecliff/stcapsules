@@ -1,6 +1,8 @@
 # stcapusule api document
 
-## 主域名 capsule.duapp.com
+## 主域名 
+
+stcapsule.duapp.com
 
 ## User API
 - /api/login/
