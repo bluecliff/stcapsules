@@ -1,5 +1,7 @@
 # stcapusule api document
 
+## 主域名 capsule.duapp.com
+
 ## User API
 - /api/login/
 
@@ -35,8 +37,8 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
         "followers": 1,
         "id": "53913dd5809cb80b461b09d5", #胶囊id
         "location": [
-            120,
-            140
+            120, #longitude
+            140  #latitude
         ],
         "title": "Test"
     },
