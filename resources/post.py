@@ -12,7 +12,7 @@ class PostListPostArgs(BaseArgs):
         self.parser.add_argument('longitude',type=float,help='longtitude must be float')
         self.parser.add_argument('latitude',type=float,help='latitude must be float')
         self.parser.add_argument('distance',type=int,help='distance have to be integer')
-        self.parser.add_argument('active_time',type=int,help='active_time must be an timedate type')
+        self.parser.add_argument('active_time',type=float,help='active_time must be an timedate type')
         self.parser.add_argument('category',type=int,help='category have to be integer')
         self.parser.add_argument('content',type=str)
         self.parser.add_argument('imagekey',type=str)
