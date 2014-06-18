@@ -8,16 +8,16 @@ from models.post import add_post,get_post,get_post_list
 
 class PostListPostArgs(BaseArgs):
     def rules(self):
-        self.parser.add_argument('title',type=unicode,help='title must be string')
+        self.parser.add_argument('title',type=str,help='title must be string')
         self.parser.add_argument('longitude',type=float,help='longtitude must be float')
         self.parser.add_argument('latitude',type=float,help='latitude must be float')
         self.parser.add_argument('distance',type=int,help='distance have to be integer')
         self.parser.add_argument('active_time',type=float,help='active_time must be an timedate type')
         self.parser.add_argument('category',type=int,help='category have to be integer')
-        self.parser.add_argument('content',type=unicode)
+        self.parser.add_argument('content',type=str)
         self.parser.add_argument('imagekey',type=str)
         self.parser.add_argument('wavekey',type=str)
-        self.parser.add_argument('receivers',type=unicode,action='append')
+        self.parser.add_argument('receivers',type=str,action='append')
 
 class PostListQueryArgs(BaseArgs):
     def rules(self):
