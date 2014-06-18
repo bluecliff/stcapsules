@@ -38,6 +38,7 @@ post_list_fields={
         'active_time':fields.DateTime,
         'category':fields.Integer,
         'followers':LengthField,
+        'content':fields.String,
         }
 
 post_fields={
