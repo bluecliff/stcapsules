@@ -14,10 +14,10 @@ class PostListPostArgs(BaseArgs):
         self.parser.add_argument('distance',type=int,help='distance have to be integer')
         self.parser.add_argument('active_time',type=float,help='active_time must be an timedate type')
         self.parser.add_argument('category',type=int,help='category have to be integer')
-        self.parser.add_argument('content',type=str)
-        self.parser.add_argument('imagekey',type=str)
-        self.parser.add_argument('wavekey',type=str)
-        self.parser.add_argument('receivers',type=str,action='append')
+        self.parser.add_argument('content',type=unicode)
+        self.parser.add_argument('imagekey',type=unicode)
+        self.parser.add_argument('wavekey',type=unicode)
+        self.parser.add_argument('receivers',type=unicode,action='append')
 
 class PostListQueryArgs(BaseArgs):
     def rules(self):
