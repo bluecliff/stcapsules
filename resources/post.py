@@ -8,7 +8,7 @@ from models.post import add_post,get_post,get_post_list
 
 class PostListPostArgs(BaseArgs):
     def rules(self):
-        self.parser.add_argument('title',type=str,help='title must be string')
+        self.parser.add_argument('title',type=unicode,help='title must be string')
         self.parser.add_argument('longitude',type=float,help='longtitude must be float')
         self.parser.add_argument('latitude',type=float,help='latitude must be float')
         self.parser.add_argument('distance',type=int,help='distance have to be integer')
