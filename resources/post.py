@@ -11,6 +11,7 @@ class PostListPostArgs(BaseArgs):
         self.parser.add_argument('title',type=unicode,help='title must be string')
         self.parser.add_argument('longitude',type=float,help='longtitude must be float')
         self.parser.add_argument('latitude',type=float,help='latitude must be float')
+        self.parser.add_argument('location_name',type=unicode)
         self.parser.add_argument('distance',type=int,help='distance have to be integer')
         self.parser.add_argument('active_time',type=float,help='active_time must be an timedate type')
         self.parser.add_argument('category',type=int,help='category have to be integer')
@@ -35,6 +36,7 @@ post_list_fields={
         'author':UserField,
         'title':fields.String,
         'location':LocationField,
+        'location_name':fields.String,
         'active_time':fields.DateTime,
         'category':fields.Integer,
         'followers':LengthField,
@@ -46,6 +48,7 @@ post_fields={
         'author':UserField,
         'title':fields.String,
         'location':LocationField,
+        'location_name':fields.String,
         'active_time':fields.DateTime,
         'category':fields.Integer,
         'followers':LengthField,

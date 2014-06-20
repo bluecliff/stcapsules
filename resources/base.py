@@ -14,7 +14,12 @@ class LocationField(fields.Raw):
 
 class UserField(fields.Raw):
     def format(self,value):
-        return value.user_id
+        return {
+                'user_id':value.user_id,
+                'user_name':value.user_name,
+                'avatar_url':value.avatar_url,
+                'snp':value.snp,
+                }
 
 class KeyURLField(fields.Raw):
     def format(self,value):

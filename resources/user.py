@@ -6,11 +6,17 @@ from flask import session
 from models.user import get_user
 
 parser=reqparse.RequestParser()
-parser.add_argument('user_id',type=str)
+parser.add_argument('user_id',type=unicode)
+parser.add_argument('user_name',type=unicode)
+parser.add_argument('avatar_url',type=unicode)
+parser.add_argument('snp',type=int)
 
 user_fields={
 #        'id':fields.String,
         'user_id':fields.String,
+        'user_name':fields.String,
+        'avatar_url':fields.String,
+        'snp':fields.Integer,
         'favourites':fields.Integer,
         'receives':fields.Integer,
         }
@@ -21,7 +27,8 @@ class UserResource(Resource):
     def post(self):
         args=parser.parse_args()
         try:
-            user=get_user(user_id=args['user_id'])
+#            user=get_user(user_id=args['user_id'])
+            user=get_user(**args)
             session['user']=user['id']
             return user
         except:

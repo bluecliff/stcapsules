@@ -23,7 +23,8 @@ def add_post(**kwargs):
         post[key]=kwargs[key]
     post['author']=user
     post.save()
-    add_receives(post,receivers)
+    if post.category==CATEGORY['PROTECTED']:
+        add_receives(post,receivers)
     return post
 
 def get_post_list(**kwargs):

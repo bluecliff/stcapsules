@@ -22,6 +22,7 @@ class Post(Document):
     author=ReferenceField(User)
     title=StringField(required=True,max_length=20)
     location=GeoPointField(required=True)
+    location_name=StringField(max_length=512)
     distance=IntField(required=True,default=DISTANCE[0])
     created_at=DateTimeField(default=datetime.datetime.utcnow,required=True)
     active_time=DateTimeField(required=True)
