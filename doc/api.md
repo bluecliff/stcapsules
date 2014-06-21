@@ -1,14 +1,17 @@
 # stcapusule api document
 
-## 主域名 
+## 主域名
 
 stcapsule.duapp.com
 
 ## User API
 - /api/login/
 
-登录接口，用post方法提交登录数据，登录数据只有一个参数：user_id，为客户端通过OAUTH
-从新浪微博，腾讯微博获取得到的id号。
++ POST方法,登录接口，用post方法提交登录数据:
+    - user_id，为客户端通过OAUTH从新浪微博，腾讯微博获取得到的id号。
+    - user_name,为客户端通过OAUTH从新浪微博，腾讯获取的用户名。
+    - avatar_url，为客户端通过OAUTH从新浪微博，腾讯微博获取的用户的图像链接。
+    - snp，为用户选择的登录平台，整数，如0标识腾讯，1标识新浪等。
 
 返回json格式的数据:
 
@@ -17,6 +20,9 @@ stcapsule.duapp.com
     "favourites": 0,
     "id": 317970455,
     "receives": 0,
+    "user_name":清雅白鹿，
+    "avatar_url":http://test.com/sd.jpg,
+    "snp":0
 }
 ```
 
@@ -34,7 +40,12 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
     [
     {
         "active_time": "Sat, 23 May 1970 21:21:18 -0000",
-        "author": "3179705582",
+        "author": {
+                    "user_id":"317970558"
+                    "user_name":"lishaungjiang"，
+                    "avatar_url":"http://test.com/test.jpg",
+                    "snp":0,
+                    },
         "category": 3,
         "followers": 1,
         "id": "53913dd5809cb80b461b09d5", #胶囊id
@@ -42,11 +53,17 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
             120, #longitude
             140  #latitude
         ],
+        "location_name":"西安电子科技大学"
         "title": "Test"
     },
     {
         "active_time": "Sat, 23 May 1970 21:21:18 -0000",
-        "author": "3179705582",
+        "author": {
+                    "user_id":"317970558"
+                    "user_name":"lishaungjiang"，
+                    "avatar_url":"http://test.com/test.jpg",
+                    "snp":0,
+                    },
         "category": 2,
         "followers": 1,
         "id": "53912798809cb8082cba3dd4",
@@ -54,11 +71,12 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
             120,
             140
         ],
+        "location_name":"西安电子科技大学"
         "title": "Test"
     }
     ]
     ```
-    
+
   + POST方法，增加一个收藏。POST提交数据包括一个post_id，值为要收藏的胶囊的ID。返回更新后的收藏列表的前10条。数据格式同上。
   + DELETE方法，删除一个收藏。提交数据包括一个post_id,值为要删除的收藏的胶囊ID。返回更新后的收藏列表的前10条，数据格式同上。
 
@@ -80,7 +98,12 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
     [
     {
         "active_time": "Sat, 23 May 1970 21:21:18 -0000",
-        "author": "3179705582",
+        "author": {
+                    "user_id":"317970558"
+                    "user_name":"lishaungjiang"，
+                    "avatar_url":"http://test.com/test.jpg",
+                    "snp":0,
+                    },
         "category": 2,
         "followers": 0,
         "id": "53912798809cb8082cba3dd4",
@@ -88,11 +111,17 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
             120,
             140
         ],
+        "location_name":"西安电子科技大学"
         "title": "Test"
     },
     {
         "active_time": "Sat, 23 May 1970 21:21:18 -0000",
-        "author": "3179705582",
+        "author": {
+                    "user_id":"317970558"
+                    "user_name":"lishaungjiang"，
+                    "avatar_url":"http://test.com/test.jpg",
+                    "snp":0,
+                    },
         "category": 3,
         "followers": 0,
         "id": "5391279d809cb8082cba3dd5",
@@ -100,6 +129,7 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
             120,
             140
         ],
+        "location_name":"西安电子科技大学"
         "title": "Test"
     }
     ]
@@ -117,6 +147,7 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
     + imagekey: 图片的唯一标识，可选，使用md5
     + wavekey: 声音的唯一标识，可选，使用md5
     + receivers: 在类型为1时的必填选项，值为发送目标的微博ID
+    + location_name: 地点的具体名字
 
     上面的可选参数表示该参数可以有可以没有，没有的时候即默认的胶囊没有这一属性。
 
@@ -124,7 +155,12 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
     ```
     {
         "active_time": "Sat, 23 May 1970 21:21:18 -0000",
-        "author": "3179705582",
+        "author": {
+                    "user_id":"317970558"
+                    "user_name":"lishaungjiang"，
+                    "avatar_url":"http://test.com/test.jpg",
+                    "snp":0,
+                    },
         "category": 3,
         "followers": 0,
         "id": "539145d4809cb8116d5d832c",
@@ -132,6 +168,7 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
         120,
         140
         ],
+        "location_name":"西安电子科技大学"
         "title": "Test"
     }
     ```
@@ -166,7 +203,12 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
     ```
     {
         "active_time": "Sat, 23 May 1970 21:21:18 -0000",
-        "author": "3179705582",
+        "author": {
+                    "user_id":"317970558"
+                    "user_name":"lishaungjiang"，
+                    "avatar_url":"http://test.com/test.jpg",
+                    "snp":0,
+                    },
         "category": 3,
         "content": "test capusuls test capusulstest capusulstest capusulstest capusulstest capusulstest capusuls",
         "followers": 0,
@@ -176,6 +218,7 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
             120,
             140
         ],
+        "location_name":"西安电子科技大学"
         "title": "Test",
         "waveurl": "http://www.url2.com"
     }
@@ -190,12 +233,22 @@ favourites字段是用户收藏的胶囊数目，receives是用户收到的胶�
       ```
       [
         {
-            "author": "3179705582",
+            "author": {
+                    "user_id":"317970558"
+                    "user_name":"lishaungjiang"，
+                    "avatar_url":"http://test.com/test.jpg",
+                    "snp":0,
+                    },
             "content": "Test comment6",
             "created_at": "Fri, 06 Jun 2014 09:36:19 -0000"
         },
         {
-            "author": "3179705582",
+            "author": {
+                    "user_id":"317970558"
+                    "user_name":"lishaungjiang"，
+                    "avatar_url":"http://test.com/test.jpg",
+                    "snp":0,
+                    },
             "content": "Test comment7",
             "created_at": "Fri, 06 Jun 2014 09:36:19 -0000"
         },
